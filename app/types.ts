@@ -6,6 +6,7 @@ export interface SalesBrief {
   target_customer: string;
   b2b_qualified: boolean;
   b2b_reasoning: string;
+  b2b_signals: string[];
   sales_questions: string[];
   confidence: "low" | "medium" | "high";
   evidence_note?: string | null;

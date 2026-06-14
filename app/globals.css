@@ -95,9 +95,109 @@ textarea:disabled {
   flex-wrap: wrap;
 }
 
-.toolbar input[type="file"] {
+/* Wraps the textarea so files can be dragged onto it. */
+.dropzone {
+  position: relative;
+}
+
+.dropzone.drag-active textarea {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.drop-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--surface);
+  border: 2px dashed var(--accent);
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+/* Styled label that stands in for the hidden native file input. */
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.upload-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.upload-icon {
+  font-size: 15px;
+}
+
+/* Chip shown once a file is selected. */
+.file-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
   font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-alt);
+  max-width: 320px;
+}
+
+.file-name {
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-size {
   color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.file-remove {
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.file-remove:hover:not(:disabled) {
+  color: var(--danger);
+  box-shadow: none;
+}
+
+/* B2B evidence tags in the detail modal. */
+.signal-tag {
+  display: inline-block;
+  margin: 2px 4px 2px 0;
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: 12px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
 }
 
 .filters {

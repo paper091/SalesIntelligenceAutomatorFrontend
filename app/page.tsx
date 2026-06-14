@@ -43,6 +43,7 @@ export default function Home() {
   const [results, setResults] = useState<LeadResult[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [running, setRunning] = useState(false);
+  const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
@@ -164,6 +165,16 @@ export default function Home() {
     window.location.href = `${API_URL}/api/leads/export`;
   }
 
+  // Accept a .txt/.csv dropped onto the textarea, same as picking one.
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault();
+    setDragActive(false);
+    const dropped = e.dataTransfer.files?.[0];
+    if (dropped && /\.(txt|csv)$/i.test(dropped.name)) {
+      setFile(dropped);
+    }
+  }
+
   // Apply the status/B2B/confidence filters before sorting, so the sort
   // and the "X of Y leads" count both reflect what's actually shown.
   const filteredResults = useMemo(() => {
@@ -234,27 +245,51 @@ export default function Home() {
         </button>
       </div>
 
-      <textarea
-        value={leadsText}
-        onChange={(e) => setLeadsText(e.target.value)}
-        disabled={!!file}
-        placeholder="Paste leads here, one per line - or click 'Load sample leads' below."
-      />
+      <div
+        className={`dropzone ${dragActive ? "drag-active" : ""}`}
+        onDragOver={(e) => {
+          e.preventDefault();
+          setDragActive(true);
+        }}
+        onDragLeave={() => setDragActive(false)}
+        onDrop={handleDrop}
+      >
+        <textarea
+          value={leadsText}
+          onChange={(e) => setLeadsText(e.target.value)}
+          disabled={!!file}
+          placeholder="Paste leads here, one per line - or click 'Load sample leads' below."
+        />
+        {dragActive && <div className="drop-overlay">Drop .txt or .csv to upload</div>}
+      </div>
 
       <div className="toolbar">
         <button onClick={() => setLeadsText(SAMPLE_LEADS)} type="button">
           Load sample leads
         </button>
-        <input
-          type="file"
-          accept=".txt,.csv"
-          onChange={(e) => setFile(e.target.files?.[0] || null)}
-        />
-        {file && (
-          <button onClick={() => setFile(null)} type="button">
-            Clear file
-          </button>
+
+        {file ? (
+          <div className="file-chip">
+            <span className="file-icon" aria-hidden>📄</span>
+            <span className="file-name" title={file.name}>{file.name}</span>
+            <span className="file-size">({(file.size / 1024).toFixed(1)} KB)</span>
+            <button onClick={() => setFile(null)} type="button" className="file-remove" aria-label="Remove file">
+              ✕
+            </button>
+          </div>
+        ) : (
+          <label className="upload-btn">
+            <span className="upload-icon" aria-hidden>⬆</span>
+            Upload .txt / .csv
+            <input
+              type="file"
+              accept=".txt,.csv"
+              onChange={(e) => setFile(e.target.files?.[0] || null)}
+              hidden
+            />
+          </label>
         )}
+
         <button onClick={handleRun} disabled={running} className="primary">
           {running ? "Running..." : "Run"}
         </button>
@@ -447,6 +482,14 @@ export default function Home() {
                   {" — "}
                   {selected.brief.b2b_reasoning}
                 </p>
+                {selected.brief.b2b_signals?.length > 0 && (
+                  <p>
+                    <strong>B2B Signals:</strong>{" "}
+                    {selected.brief.b2b_signals.map((s, i) => (
+                      <span key={i} className="signal-tag">{s}</span>
+                    ))}
+                  </p>
+                )}
                 <p><strong>Sales Questions:</strong></p>
                 <ul>
                   {selected.brief.sales_questions.map((q, i) => (
