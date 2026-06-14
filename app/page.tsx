@@ -38,7 +38,7 @@ const SORT_BY_OPTIONS: { value: SortBy; label: string }[] = [
 ];
 
 export default function Home() {
-  const [leadsText, setLeadsText] = useState(SAMPLE_LEADS);
+  const [leadsText, setLeadsText] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [results, setResults] = useState<LeadResult[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -238,9 +238,13 @@ export default function Home() {
         value={leadsText}
         onChange={(e) => setLeadsText(e.target.value)}
         disabled={!!file}
+        placeholder="Paste leads here, one per line - or click 'Load sample leads' below."
       />
 
       <div className="toolbar">
+        <button onClick={() => setLeadsText(SAMPLE_LEADS)} type="button">
+          Load sample leads
+        </button>
         <input
           type="file"
           accept=".txt,.csv"
