@@ -1,0 +1,44 @@
+
+> sales-intelligence-automator-frontend@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 10.3s
+ ○ Compiling / ...
+ ✓ Compiled / in 7s (458 modules)
+ GET / 200 in 7534ms
+ GET / 200 in 92ms
+ GET / 200 in 62ms
+ ✓ Compiled in 737ms (444 modules)
+ ✓ Compiled in 1096ms (444 modules)
+ ✓ Compiled in 437ms (444 modules)
+ ✓ Compiled in 340ms (444 modules)
+ GET / 200 in 191ms
+ ✓ Compiled in 479ms (444 modules)
+ ✓ Compiled in 330ms (444 modules)
+ ✓ Compiled in 306ms (444 modules)
+ ✓ Compiled in 835ms (458 modules)
+ GET / 200 in 129ms
+ GET / 200 in 45ms
+ GET / 200 in 56ms
+ ✓ Compiled in 343ms (444 modules)
+ ✓ Compiled in 268ms (444 modules)
+ ✓ Compiled in 261ms (458 modules)
+ GET / 200 in 96ms
+ GET / 200 in 46ms
+ ✓ Compiled in 241ms (444 modules)
+ ✓ Compiled in 164ms (458 modules)
+ GET / 200 in 65ms
+ ✓ Compiled in 506ms (444 modules)
+ ✓ Compiled in 565ms (444 modules)
+ ✓ Compiled in 227ms (444 modules)
+ ✓ Compiled in 302ms (444 modules)
+ ✓ Compiled in 221ms (444 modules)
+ ✓ Compiled in 275ms (444 modules)
+ ✓ Compiled in 385ms (444 modules)
+ GET / 200 in 159ms
+^C^C

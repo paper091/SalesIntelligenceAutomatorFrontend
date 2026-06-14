@@ -1,0 +1,21 @@
+
+> sales-intelligence-automator-frontend@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 2.4s
+ ○ Compiling / ...
+ ✓ Compiled / in 4s (458 modules)
+ GET / 200 in 4355ms
+ GET / 200 in 81ms
+ ✓ Compiled in 1157ms (444 modules)
+ ✓ Compiled in 538ms (444 modules)
+ GET / 200 in 246ms
+ GET / 200 in 50ms
+ GET / 200 in 97ms
+ ✓ Compiled in 698ms (458 modules)
+ ✓ Compiled in 426ms (444 modules)
